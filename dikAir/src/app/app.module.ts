@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-// import { HttpModule } from '@angular/http';
+import { HttpClientModule } from "@angular/common/http";
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -16,7 +16,8 @@ import { MenuComponent } from './menu/menu.component';
 import { BookComponent } from './book/book.component';
 
 const appRoutes:Routes = [
-  {path: 'chat', component: ChatComponent}
+  {path: 'chat', component: ChatComponent},
+  {path: 'book', component: BookComponent}
 ]
 
 @NgModule({
@@ -32,7 +33,8 @@ const appRoutes:Routes = [
     FormsModule,
     RouterModule.forRoot(
       appRoutes
-    )
+    ),
+    HttpClientModule
   ],
   providers: [ChatService],
   bootstrap: [AppComponent]

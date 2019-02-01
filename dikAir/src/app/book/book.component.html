@@ -1,3 +1,31 @@
 <p>
   book works!
 </p>
+
+<button (click)="getAllFlights()">hello</button>
+<table class="table">
+  <thead>
+    <tr>
+    <th>
+      Flight Number
+    </th>
+    <th>
+      Destination
+    </th>
+    <th>
+      Origin
+    </th>
+    <th>
+      Price
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let flight of flightsList">
+    <td>{{ flight.flightNumber }}</td>
+    <td>{{ flight.destinationId }}</td>
+    <td>{{ flight.originId }}</td>
+    <td>{{ flight.price }}$</td>
+  </tr>
+</tbody>
+</table>
