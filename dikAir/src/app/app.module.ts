@@ -12,6 +12,8 @@ import { ChatService } from './chat.service';
 
 // Components
 import { ChatComponent } from './chat/chat.component';
+import { MenuComponent } from './menu/menu.component';
+import { BookComponent } from './book/book.component';
 
 const appRoutes:Routes = [
   {path: 'chat', component: ChatComponent}
@@ -20,7 +22,9 @@ const appRoutes:Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    ChatComponent
+    ChatComponent,
+    MenuComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,

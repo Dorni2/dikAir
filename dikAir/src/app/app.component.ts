@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService } from './chat.service';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+
+import { MenuComponent } from "./menu/menu.component";
 
 @Component({
   selector: 'app-root',
@@ -8,20 +8,10 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  message: string;
-  messages: string[] = [];
-
-  constructor(private chatService: ChatService) {
-    this.chatService
-      .getMessages()
-      .subscribe((fetchedMessage: string) => {
-        this.messages.push(fetchedMessage);
-      });
+  constructor() {
   }
 
-  sendMessage() {
-    this.chatService.sendMessage(this.message);
-    console.log(this.messages);
-    this.message = '';
-  }
+  title = 'DikAir'
+
+
 }
