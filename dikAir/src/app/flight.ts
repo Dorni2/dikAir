@@ -7,16 +7,6 @@ export class Flight {
     originId: number;
     destinationId:number;
     price:number;
-
-    /**
-     *
-     */
-    constructor(private flightService:FlightService) {
-        
-    }
-
-    getAllFlights(): Observable<Flight[]> {
-        return this.flightService.getFlights();
-    }
-
+    origin:string = null;
+    destination:string = null;
 }

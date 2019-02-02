@@ -16,19 +16,17 @@ export class BookComponent implements OnInit {
   flightsList:Flight[] = [];
 
   ngOnInit() {
-
+      this.getAllFlights();
   }
 
-  // getAllFlights():any {
-  //   this.flightService.getFlights().subscribe(fetchedFlight => this.flightsList = fetchedFlight);
-  //   console.log('hello');
-  // }
+
 
   getAllFlights():any {
     this.flightsList = [];
     this.flightService.getFlights().subscribe(flts => {
-      console.log(flts[0])
       flts.forEach(element => {
+        this.flightService.getCityById(element.originId).subscribe(ct => element.origin = ct.name);
+        this.flightService.getCityById(element.destinationId).subscribe(ct => element.destination = ct.name);
         this.flightsList.push(element);
       });
     });
