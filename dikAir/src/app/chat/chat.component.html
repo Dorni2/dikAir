@@ -1,11 +1,15 @@
-<p>
-  chat works!
-</p>
+<div *ngIf="isLogged">
 
-
-<div *ngFor="let message of messages">
-  {{message}}
+<h1>{{ user.name }}</h1>
+<div *ngFor="let message of messages" >
+  <div [ngStyle]="{'color': message.split(';')[1]}">
+  {{message.split(';')[0]}}
+</div>
 </div>
 
 <input [(ngModel)]="message" (keyup)="$event.keyCode == 13 && sendMessage()" />
 <button (click)="sendMessage()">Send</button>
+</div>
+<div *ngIf="!isLogged">
+  <h1> You are not allowed to reach this page! </h1>
+</div>

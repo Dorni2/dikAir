@@ -14,6 +14,7 @@ import { ChatService } from './chat.service';
 import { ChatComponent } from './chat/chat.component';
 import { MenuComponent } from './menu/menu.component';
 import { BookComponent } from './book/book.component';
+import { RegloginComponent } from './reglogin/reglogin.component';
 
 const appRoutes:Routes = [
   {path: 'chat', component: ChatComponent},
@@ -25,7 +26,8 @@ const appRoutes:Routes = [
     AppComponent,
     ChatComponent,
     MenuComponent,
-    BookComponent
+    BookComponent,
+    RegloginComponent
   ],
   imports: [
     BrowserModule,

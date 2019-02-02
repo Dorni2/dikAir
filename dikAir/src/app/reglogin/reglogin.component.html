@@ -1,0 +1,28 @@
+<div class="relogin">
+  <div *ngIf="!isLogged">
+    <form class="form-group">
+      <input class="form-control"  #email type="text" name="email" placeholder="email">
+      <input class="form-control" #password type="password" name="password" placeholder="password">
+      <button class="btn btn-primary" (click)="login(email.value, password.value)">login</button> 
+      <button class="btn btn-secondary" (click)="wantRegister()">register</button>
+
+    </form>
+  </div>
+  <div *ngIf="isLogged && loggedUser">
+    Hello {{loggedUser.firstName}}
+    <button class="btn btn-secondary" (click)="logOut()">logOut</button>
+  </div>
+  <div *ngIf="isWantRegister" class="form-group">
+    <form>
+      <input class="form-control" #email type="email" name="email" placeholder="email">
+      <input class="form-control"#password type="password" name="password" placeholder="password">
+      <input class="form-control" #firstName type="text" name="firstName" placeholder="firstName">
+      <input class="form-control" #lastName type="text" name="lastName" placeholder="lastName">
+      <select #cityId class="custom-select">
+        <option>Select City</option>
+        <option *ngFor="let item of cityList" value={{item.id}}>{{ item.name }}</option>
+      </select><br>
+      <button class="btn btn-primary" (click)="register(email.value, password.value, firstName.value, lastName.value, cityId.value)">Register</button>
+    </form>
+  </div>
+</div>

@@ -16,3 +16,30 @@
     transform: rotate(65deg);
     
 }
+
+.btn {
+    margin: 2px;
+}
+
+input {
+    margin: 2px;
+}
+
+select {
+    margin: 1px;
+}
+
+.relogin {
+    border: 7px;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: #161f38;
+    margin-right: 10px;
+    padding: 10px;
+}
+
+.relogin-div {
+    margin: 3px;
+    width: 20%;
+    margin-left: 40%;
+}
