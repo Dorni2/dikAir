@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Flight } from './flight';
 import { City } from "./city";
 import { User } from "./user";
+import { StatObject } from "./stat-object";
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,16 @@ export class FlightService {
     var address:string = "http://localhost:3000/api/cities";
     return this.httpClient.get<City[]>(address);
   }
+
+  public getFlightStats(): Observable<StatObject[]> {
+    var address:string = "http://localhost:3000/api/flights/stats";
+    return this.httpClient.get<StatObject[]>(address);
+  }
+
+  public deleteFlight(flightId:number): Observable<number> {
+    var address = "http://localhost:3000/api/flights/delete/" + flightId;
+    return this.httpClient.get<number>(address);
+  } 
 
 
 

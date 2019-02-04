@@ -3,6 +3,7 @@ import { User } from "../user";
 import { FlightService } from "../flight.service";
 import { City } from '../city';
 import { Router } from "@angular/router";
+import { Globals } from "../globals";
 
 @Component({
   selector: 'app-reglogin',
@@ -17,7 +18,10 @@ export class RegloginComponent implements OnInit {
     isAdmin = false;
     loggedUser:User = null;
     isWantRegister = false;
+    
     cityList:City[] = [];
+    isLoginFailed = false;
+
   ngOnInit() {
 
   }
@@ -37,10 +41,10 @@ export class RegloginComponent implements OnInit {
 
   register(email:string, password:string, firstName:string, lastName:string, cityId:number = null):void {
     if(email !== "" && 
-       password !== "" &&
-       firstName !== "" &&
-       lastName !== "" &&
-       cityId !== null) {
+      password !== "" &&
+      firstName !== "" &&
+      lastName !== "" &&
+      cityId !== null) {
       this.flightService.register(email, password, firstName, lastName, cityId).subscribe(usr => {
         this.loggedUser = usr;
         this.isLogged = true;
@@ -49,7 +53,7 @@ export class RegloginComponent implements OnInit {
         this.isWantRegister = false;
       });
   }
-}
+  }
 
   wantRegister() {
     this.isWantRegister = true;

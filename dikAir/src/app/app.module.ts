@@ -15,10 +15,13 @@ import { ChatComponent } from './chat/chat.component';
 import { MenuComponent } from './menu/menu.component';
 import { BookComponent } from './book/book.component';
 import { RegloginComponent } from './reglogin/reglogin.component';
+import { ChartComponent } from './chart/chart.component';
+import { ChartsModule } from 'ng2-charts';
 
 const appRoutes:Routes = [
   {path: 'chat', component: ChatComponent},
-  {path: 'book', component: BookComponent}
+  {path: 'book', component: BookComponent},
+  {path: 'stats', component: ChartComponent}
 ]
 
 @NgModule({
@@ -27,7 +30,8 @@ const appRoutes:Routes = [
     ChatComponent,
     MenuComponent,
     BookComponent,
-    RegloginComponent
+    RegloginComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ const appRoutes:Routes = [
     RouterModule.forRoot(
       appRoutes
     ),
-    HttpClientModule
+    HttpClientModule,
+    ChartsModule
   ],
   providers: [ChatService],
   bootstrap: [AppComponent]

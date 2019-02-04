@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Flight } from "../flight";
 import { FlightService } from '../flight.service';
 import { City } from '../city';
@@ -10,7 +10,7 @@ import { City } from '../city';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-
+  @Input() isAdmin:boolean = true;
   cityList:City[] = []
   flightsList:Flight[] = [];
   flightsToShow:Flight[] = [];
@@ -53,8 +53,18 @@ export class BookComponent implements OnInit {
     if (destinationId != 0){
       this.flightsToShow = this.flightsToShow.filter(flt => flt.destinationId.toString() === destinationId.toString());
     }
+  }
 
-
+  deleteFlight(flightId:number) {
+    this.flightService.deleteFlight(flightId).subscribe(res => {
+      if (res === 1) {
+        this.flightsToShow.forEach(element => {
+          if (element.id === flightId) {
+            this.flightsToShow.splice(this.flightsToShow.indexOf(element), 1)
+          }
+        });
+      }
+    })
   }
 
 }
