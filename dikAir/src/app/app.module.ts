@@ -30,6 +30,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { FlightService } from './flight.service';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
 import { BookingsCountComponent } from './bookings-count/bookings-count.component';
+import { WordCounterPipe } from './word-counter.pipe';
 
 const appRoutes:Routes = [
   {path: 'chat', component: ChatComponent},
@@ -56,7 +57,8 @@ const appRoutes:Routes = [
     CreateCityComponent,
     ErrorPageComponent,
     MyBookingsComponent,
-    BookingsCountComponent
+    BookingsCountComponent,
+    WordCounterPipe
   ],
   imports: [
     BrowserModule,

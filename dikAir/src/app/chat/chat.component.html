@@ -14,3 +14,8 @@
 <div *ngIf="!isLogged">
   <h1>You are not allowed to reach this page!</h1>
 </div>
+<div *ngIf="show">
+  <div *ngFor="let item of hllResult">
+    <label>{{item | wordCounter}}</label>
+  </div>
+</div>
