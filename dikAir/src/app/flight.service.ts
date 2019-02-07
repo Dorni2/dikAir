@@ -87,7 +87,16 @@ export class FlightService {
 
   public bookFlight(userId:number, flightId:number, totalPrice:number): Observable<Booking> {
     var address = "http://localhost:3000/api/bookings/new/" + userId + "&" + flightId + "&" + totalPrice;
-    console.log(address);
+    return this.httpClient.get<Booking>(address);
+  }
+
+  public getAllBookings(): Observable<Booking[]> {
+    var address = "http://localhost:3000/api/bookings";
+    return this.httpClient.get<Booking[]>(address);
+  }
+
+  public cancelBooking(flightId:number): Observable<Booking> {
+    var address = "http://localhost:3000/api/bookings/delete/" + flightId;
     return this.httpClient.get<Booking>(address);
   }
 }

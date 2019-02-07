@@ -5,6 +5,7 @@ import { City } from '../city';
 import { Router } from "@angular/router";
 import { Globals } from "../globals";
 import { ToastrService } from "ngx-toastr";
+import { ChatService } from "../chat.service";
 
 
 @Component({
@@ -19,7 +20,7 @@ export class BookComponent implements OnInit {
   flightsToShow:Flight[] = [];
 
   constructor(private flightService:FlightService, private router:Router, private globals:Globals,
-              private toast:ToastrService) { 
+              private toast:ToastrService, private chatService:ChatService) { 
   }
 
 
@@ -78,6 +79,7 @@ export class BookComponent implements OnInit {
   bookFlight(flightId:number, price:number) {
     if (this.globals.loggedUser !== null) {
       this.flightService.bookFlight(this.globals.loggedUser.id, flightId, price).subscribe(res => {
+        this.chatService.sendOrder(res);
         this.toast.success("Flight Booked Successfully", "Enjoy your flight!", {
           timeOut: 5000
         });

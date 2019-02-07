@@ -16,6 +16,9 @@
     <th>
       Map
     </th>
+    <th>
+      Cancel
+    </th>
   </tr>
   </thead>
   <tbody>
@@ -25,6 +28,7 @@
     <td>{{ flight.origin }}</td>
     <td>{{ flight.price }}$</td>
     <td><img class="zoom" style="width:100px; height: 100px;"  src="https://dev.virtualearth.net/REST/v1/Imagery/Map/AerialWithLabels/{{flight.destination}}?highlightEntity=1&key=An1CK1H4UGFk1_HFAL7g9EfE7E8iTjzNN2hikZl8yzFpNpDNvNYufpC_IvHhyTIp" /></td>
+    <td><button class="btn btn-warning" (click)="cancelOrder(flight.bookingId)">Cancel Order</button></td>
   </tr>
 </tbody>
 </table>

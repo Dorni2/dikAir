@@ -3,6 +3,7 @@ import { Globals } from "../globals";
 import { Router } from "@angular/router";
 import { FlightService } from "../flight.service";
 import { Flight } from '../flight';
+import { ChatService } from "../chat.service";
 
 @Component({
   selector: 'app-my-bookings',
@@ -11,7 +12,7 @@ import { Flight } from '../flight';
 })
 export class MyBookingsComponent implements OnInit {
 
-  constructor(private globals:Globals,  private router:Router, private flightService:FlightService) { 
+  constructor(private globals:Globals,  private router:Router, private flightService:FlightService, private chatService:ChatService) { 
     if(this.globals.loggedUser === null) {
       this.router.navigate(['/error']);
     }
@@ -28,6 +29,7 @@ export class MyBookingsComponent implements OnInit {
             flightRes.origin = origRes.name;
             this.flightService.getCityById(flightRes.destinationId).subscribe(destRes => {
               flightRes.destination = destRes.name;
+              flightRes['bookingId'] = element.id;
               this.flightsToShow.push(flightRes);
             })
           })
@@ -36,4 +38,32 @@ export class MyBookingsComponent implements OnInit {
     })
   }
 
+  cancelOrder(bookingId:number) {
+    console.log(bookingId);
+    this.flightService.getAllBookings().subscribe(all => {
+      all.forEach(element => {
+        if (element.id === bookingId)
+        {
+          this.flightService.cancelBooking(bookingId).subscribe(res => {
+            this.flightsToShow.splice(this.flightsToShow.findIndex(flt => flt['bookingId'] === bookingId), 1);
+            console.log(element);
+            this.chatService.deleteOrder(element);
+          })
+        }
+      });
+    })
+    this.flightService.cancelBooking(bookingId).subscribe(deletedBooking => {
+
+    })
+  }
 }
+
+// cancelOrder(flightId:number, bookingId:number) {
+//   this.flightService.getFlightById(flightId).subscribe(flightToDelete => {
+//     this.flightService.cancelBooking(flightToDelete.id).subscribe(deleted => {
+//       console.log(flightToDelete);
+//       this.chatService.deleteOrder(flightToDelete);
+//       this.flightsToShow.splice(this.flightsToShow.findIndex(flt => flt.id === flightId), 1);
+//     })
+//   })
+// }

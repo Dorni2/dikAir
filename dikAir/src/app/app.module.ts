@@ -29,6 +29,7 @@ import { CreateCityComponent } from './create-city/create-city.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { FlightService } from './flight.service';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
+import { BookingsCountComponent } from './bookings-count/bookings-count.component';
 
 const appRoutes:Routes = [
   {path: 'chat', component: ChatComponent},
@@ -54,7 +55,8 @@ const appRoutes:Routes = [
     EditCityComponent,
     CreateCityComponent,
     ErrorPageComponent,
-    MyBookingsComponent
+    MyBookingsComponent,
+    BookingsCountComponent
   ],
   imports: [
     BrowserModule,
