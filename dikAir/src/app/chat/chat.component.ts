@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
 import { User } from "../user";
+import { Globals } from "../globals";
 
 @Component({
   selector: 'app-chat',
@@ -14,7 +15,7 @@ export class ChatComponent implements OnInit {
   color:string = "rgb(" + Math.floor(Math.random() * 255) + ", " + Math.floor(Math.random() * 255) + ", " + Math.floor(Math.random() * 255) + ")";
   fetchedColor:string;
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, private globals:Globals ) {
     this.chatService
       .getMessages()
       .subscribe((fetchedMessage: string) => {
@@ -33,10 +34,10 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (sessionStorage.getItem('loggedUser') !== null)
-    {
-      this.user = JSON.parse(sessionStorage.getItem('loggedUser'));
+    if(this.globals.isLogged()) {
+      console.log('true');
       this.isLogged = true;
+      this.user = this.globals.loggedUser;
     }
   }
 

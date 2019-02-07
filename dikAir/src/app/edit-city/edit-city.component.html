@@ -1,0 +1,23 @@
+<table class="table">
+  <thead>
+    <tr>
+    <th>
+      Name
+    </th>
+    <th>
+      Map
+    </th>
+    <th>
+      Actions
+    </th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of citiesList">
+      <td> <input class="form-control" #cityName type="text" value={{item.name}}></td>
+    <td><img class="zoom" id={{item.id}} style="width:100px; height: 100px;" src="https://dev.virtualearth.net/REST/v1/Imagery/Map/AerialWithLabels/{{item.name}}?highlightEntity=1&key=An1CK1H4UGFk1_HFAL7g9EfE7E8iTjzNN2hikZl8yzFpNpDNvNYufpC_IvHhyTIp" /></td>
+    <td><button class="btn btn-warning" (click)="deleteCity(item.id)">Remove</button>
+    <button class="btn btn-primary" (click)="saveChanges(item.id, cityName.value)" >Save Changes</button></td>
+  </tr>
+</tbody>
+</table>

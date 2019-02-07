@@ -12,13 +12,13 @@ import { Globals } from "../globals";
 })
 export class RegloginComponent implements OnInit {
 
-  constructor(private flightService:FlightService, private router:Router) { }
+  constructor(private flightService:FlightService, private router:Router, private globals:Globals) { }
 
-    isLogged = false;
+    isLogged = this.globals.isLogged();
     isAdmin = false;
     loggedUser:User = null;
-    isWantRegister = false;
     
+    isWantRegister = false;
     cityList:City[] = [];
     isLoginFailed = false;
 
@@ -28,14 +28,15 @@ export class RegloginComponent implements OnInit {
 
   login(email:string, password:string): void {
     this.flightService.login(email, password).subscribe(usr => {
-      this.loggedUser = usr;
-      if (this.loggedUser !== null) {
-        this.isLogged = true;
-        this.isAdmin = this.loggedUser.isAdmin;
-        sessionStorage.setItem('loggedUser', JSON.stringify(this.loggedUser));
-        console.log(sessionStorage.getItem('loggedUser'));
+      this.globals.loggedUser = usr;
+      if (this.globals.loggedUser !== null) {
         this.router.navigate(['/']);
+        this.isLoginFailed = false;
+      } else {
+        console.log('fail');
+        this.isLoginFailed=true;
       }
+
     })
   }
 
@@ -57,16 +58,11 @@ export class RegloginComponent implements OnInit {
 
   wantRegister() {
     this.isWantRegister = true;
-    this.isLogged = true;
     this.flightService.getCities().subscribe(flts => this.cityList=flts);
   }
 
   logOut() {
-    sessionStorage.clear();
-    this.isLogged = false;
-    this.isAdmin = false;
-    this.loggedUser = null;
-    this.isWantRegister = false;
+    this.globals.logOut();
     this.router.navigate(['/']);
   }
 }

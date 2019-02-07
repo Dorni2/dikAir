@@ -1,0 +1,6 @@
+<form class="form-group" >
+    City Name: <input style="width:30%;" class="form-control" #name type="text">
+    country Name: <input style="width:30%;" class="form-control" #countryName type="text">
+  
+    <button class="btn btn-primary" (click)="createCity(name.value, countryName.value)" >Create City</button>
+  </form>

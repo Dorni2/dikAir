@@ -1,0 +1,12 @@
+<form class="form-group" >
+  Flight number: <input style="width:30%; display: inline;" class="form-control" #flightNumber  type="text" name="number">
+  Origin: <select  style="width:30%;" #originId class="custom-select">
+    <option *ngFor="let item of citiesList" value={{item.id}}>{{ item.name }}</option>
+  </select>
+  Destination: <select  style="width:30%; display: inline;" #destinationId class="custom-select">
+    <option *ngFor="let item of citiesList" value={{item.id}}>{{ item.name }}</option>
+  </select> <br>
+  Price: <input style="width:30%;" class="form-control" #flightPrice type="text" name="number">
+
+  <button class="btn btn-primary" (click)="createFlight(flightNumber.value, flightPrice.value, originId.value, destinationId.value)" >Create Flight</button>
+</form>

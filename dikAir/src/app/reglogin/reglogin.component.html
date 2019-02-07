@@ -1,5 +1,5 @@
 <div class="relogin">
-  <div *ngIf="!isLogged">
+  <div *ngIf=!this.globals.isLogged()>
     <form class="form-group">
       <input class="form-control"  #email type="text" name="email" placeholder="email">
       <input class="form-control" #password type="password" name="password" placeholder="password">
@@ -8,9 +8,12 @@
 
     </form>
   </div>
-  <div *ngIf="isLogged && loggedUser">
-    Hello {{loggedUser.firstName}}
+  <div *ngIf=this.globals.isLogged()>
+    Hello {{this.globals.loggedUser.firstName}}
     <button class="btn btn-secondary" (click)="logOut()">logOut</button>
+  </div>
+  <div *ngIf="isLoginFailed">
+    <label>Login Failed</label>
   </div>
   <div *ngIf="isWantRegister" class="form-group">
     <form>

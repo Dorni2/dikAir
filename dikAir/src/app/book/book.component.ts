@@ -2,6 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Flight } from "../flight";
 import { FlightService } from '../flight.service';
 import { City } from '../city';
+import { Router } from "@angular/router";
+import { Globals } from "../globals";
+import { ToastrService } from "ngx-toastr";
 
 
 @Component({
@@ -10,12 +13,13 @@ import { City } from '../city';
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit {
-  @Input() isAdmin:boolean = true;
+  @Input() isAdmin:boolean = false;
   cityList:City[] = []
   flightsList:Flight[] = [];
   flightsToShow:Flight[] = [];
 
-  constructor(private flightService:FlightService) { 
+  constructor(private flightService:FlightService, private router:Router, private globals:Globals,
+              private toast:ToastrService) { 
   }
 
 
@@ -65,6 +69,25 @@ export class BookComponent implements OnInit {
         });
       }
     })
+  }
+
+  editFlight(flightId:number) {
+    this.router.navigate(['/editFlight', flightId])
+  }
+
+  bookFlight(flightId:number, price:number) {
+    if (this.globals.loggedUser !== null) {
+      this.flightService.bookFlight(this.globals.loggedUser.id, flightId, price).subscribe(res => {
+        this.toast.success("Flight Booked Successfully", "Enjoy your flight!", {
+          timeOut: 5000
+        });
+
+      })
+    } else {
+      this.toast.error("You have to sign in before booking a flight", "Error!", {
+        timeOut: 5000
+      });
+    }
   }
 
 }

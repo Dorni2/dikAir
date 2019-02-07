@@ -17,6 +17,10 @@
     
 }
 
+#toast-container > div {
+    opacity:1;
+}
+
 .btn {
     margin: 2px;
 }

@@ -32,6 +32,9 @@
     <th *ngIf="isAdmin">
       Actions
     </th>
+    <th *ngIf="!isAdmin">
+      Book
+    </th>
   </tr>
   </thead>
   <tbody>
@@ -41,7 +44,8 @@
     <td>{{ flight.origin }}</td>
     <td>{{ flight.price }}$</td>
     <td><img class="zoom" style="width:100px; height: 100px;"  src="https://dev.virtualearth.net/REST/v1/Imagery/Map/AerialWithLabels/{{flight.destination}}?highlightEntity=1&key=An1CK1H4UGFk1_HFAL7g9EfE7E8iTjzNN2hikZl8yzFpNpDNvNYufpC_IvHhyTIp" /></td>
-    <td *ngIf="isAdmin"><button class="btn btn-warning" (click)="deleteFlight(flight.id)">Remove</button><button class="btn btn-warning" (click)="Edit(flight.id)">Edit</button></td>
+    <td *ngIf="isAdmin"><button class="btn btn-warning" (click)="deleteFlight(flight.id)">Remove</button><button class="btn btn-warning" (click)="editFlight(flight.id)">Edit</button></td>
+    <td *ngIf="!isAdmin"><button class="btn btn-warning" (click)="bookFlight(flight.id, flight.price)">Order Flight</button></td>
   </tr>
 </tbody>
 </table>

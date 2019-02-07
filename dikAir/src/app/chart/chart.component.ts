@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FlightService } from "../flight.service";
 import { Flight } from '../flight';
 import { StatObject } from "../stat-object";
+import { Globals } from "../globals";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-chart',
@@ -10,24 +12,15 @@ import { StatObject } from "../stat-object";
 })
 export class ChartComponent implements OnInit {
 
-  constructor(private flightService:FlightService) { }
+  constructor(private globals:Globals,  private router:Router, private flightService:FlightService) { 
+    if(this.globals.loggedUser === null || this.globals.loggedUser.isAdmin !== true) {
+      this.router.navigate(['/error']);
+    }
+  }
 
 destinations:string[] = [];
 count:number[] = [];
-destWithNames:string[] = [];
-
-  // ngOnInit() {
-  //   this.flightService.getFlightStats().subscribe(allStats => {
-  //     allStats.forEach(stat => {
-  //       this.flightService.getCityById(stat.destinationId).subscribe(res => {
-  //         stat.destination = res.name;
-  //         console.log(res.toString());
-  //         this.destinations.push(stat.destination);
-  //         this.count.push(stat.count);
-  //       });
-  //     })
-  //   })    
-  // }
+destWithNames:string[] = [];  
 
   ngOnInit() {
     this.flightService.getFlightStats().subscribe(allStats => {
