@@ -31,6 +31,7 @@ import { FlightService } from './flight.service';
 import { MyBookingsComponent } from './my-bookings/my-bookings.component';
 import { BookingsCountComponent } from './bookings-count/bookings-count.component';
 import { WordCounterPipe } from './word-counter.pipe';
+import { SearchComponent } from './search/search.component';
 
 const appRoutes:Routes = [
   {path: 'chat', component: ChatComponent},
@@ -39,7 +40,8 @@ const appRoutes:Routes = [
   {path: 'manage', component: ManageComponent},
   {path: 'editFlight/:id', component: EditFlightComponent},
   {path: 'error', component: ErrorPageComponent},
-  {path: 'orders', component: MyBookingsComponent}
+  {path: 'orders', component: MyBookingsComponent},
+  {path: 'search', component: SearchComponent}
 ]
 
 @NgModule({
@@ -58,7 +60,8 @@ const appRoutes:Routes = [
     ErrorPageComponent,
     MyBookingsComponent,
     BookingsCountComponent,
-    WordCounterPipe
+    WordCounterPipe,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

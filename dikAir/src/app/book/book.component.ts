@@ -46,19 +46,23 @@ export class BookComponent implements OnInit {
   }
 
   filter(price:number, originId:number, destinationId:number):void {
-    this.flightsToShow = this.flightsList;
-    //console.log("price " + price + " orig " + originId);
-    if (price != null && price > 0) {
-      this.flightsToShow = this.flightsToShow.filter(flt => flt.price <= price)
-    }
+    if (price < 0) {
+      this.toast.error("Price is lower than zero", "ERROR!");
+    } else {
+      this.flightsToShow = this.flightsList;
+      //console.log("price " + price + " orig " + originId);
+      if (price != null && price > 0) {
+        this.flightsToShow = this.flightsToShow.filter(flt => flt.price <= price)
+      }
 
-    if (originId != 0){
-      this.flightsToShow = this.flightsToShow.filter(flt => flt.originId.toString() === originId.toString());
-    }
-    if (destinationId != 0){
-      this.flightsToShow = this.flightsToShow.filter(flt => flt.destinationId.toString() === destinationId.toString());
-    }
+      if (originId != 0){
+        this.flightsToShow = this.flightsToShow.filter(flt => flt.originId.toString() === originId.toString());
+      }
+      if (destinationId != 0){
+        this.flightsToShow = this.flightsToShow.filter(flt => flt.destinationId.toString() === destinationId.toString());
+      }
   }
+}
 
   deleteFlight(flightId:number) {
     this.flightService.deleteFlight(flightId).subscribe(res => {

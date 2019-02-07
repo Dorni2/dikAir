@@ -99,4 +99,9 @@ export class FlightService {
     var address = "http://localhost:3000/api/bookings/delete/" + flightId;
     return this.httpClient.get<Booking>(address);
   }
+
+  public algoSearch(word:string): Observable<any[]> {
+    var address = "http://localhost:3000/search/" + word;
+    return this.httpClient.get<any[]>(address);
+  }
 }
