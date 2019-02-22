@@ -21,10 +21,11 @@ export class SearchComponent implements OnInit {
   search(word:string) {
     this.result = [];
     this.flightService.algoSearch(word).subscribe(res => {
+      console.log(res);
       res.forEach(element => {
         console.log(element);
         //var twe = new Tweet("United Airlines", element.text);
-        this.result.push(element.tweet.text);
+        this.result.push(element.tweet);
       });
     })
   }

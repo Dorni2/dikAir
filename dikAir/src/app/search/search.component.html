@@ -3,4 +3,10 @@
     <button style="width:9%" class="btn btn-primary" (click)="search(word.value)">search</button>
   </form>
 
-<p *ngFor="let item of result">{{item}}</p>
+<!-- <p *ngFor="let item of result">{{item}}</p> -->
+
+<div class="alert alert-success" role="alert" *ngFor="let item of result">
+  <p>{{ item.text }}</p>
+  <hr>
+  <p class="mb-0">{{ item.user }} @ {{item.created_at | date }}</p>
+</div>
