@@ -1,8 +1,8 @@
-<form class="form-group" >
+<form class="form-group">
   Flight number: <input class="form-control" #flightNumber  type="text" name="number"  value="{{flightToEdit.flightNumber}}">
   Origin: <input class="form-control"  type="text" name="number"  value="{{flightToEdit.origin}}" disabled>
   Destination: <input class="form-control"  type="text" name="number"  value="{{flightToEdit.destination}}" disabled>
   Price: <input class="form-control" #flightPrice type="text" name="number"  value="{{flightToEdit.price}}">
 
-  <button class="btn btn-primary" (click)="saveChanges(flightNumber.value, flightPrice.value)" >Save Changes</button>
+  <button class="btn btn-primary" [disabled]="isEnable" (click)="saveChanges(flightNumber.value, flightPrice.value)" >Save Changes</button>
 </form>

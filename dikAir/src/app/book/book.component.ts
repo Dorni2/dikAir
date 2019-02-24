@@ -6,6 +6,7 @@ import { Router } from "@angular/router";
 import { Globals } from "../globals";
 import { ToastrService } from "ngx-toastr";
 import { ChatService } from "../chat.service";
+import { Promise } from 'q';
 
 
 @Component({
@@ -94,6 +95,22 @@ export class BookComponent implements OnInit {
         timeOut: 5000
       });
     }
+  }
+
+  isAbleToEditFlight(fligthId:Number) : boolean {
+    var isEdit = true;
+    this.flightService.getAllBookings().subscribe(res => {
+      res.forEach(element => {
+        console.log(element);
+        console.log(element.flightId.toString());
+        console.log(fligthId.toString());
+        if (element.flightId.toString() === fligthId.toString())
+          isEdit = false;
+          console.log(isEdit + '1');
+      });
+    })
+    console.log(isEdit);
+    return isEdit;
   }
 
 }

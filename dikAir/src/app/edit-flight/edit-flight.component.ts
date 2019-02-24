@@ -15,6 +15,7 @@ export class EditFlightComponent implements OnInit {
 
   id:number = null;
   flightToEdit:Flight = new Flight();
+  isEnable:boolean = false;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -27,9 +28,20 @@ export class EditFlightComponent implements OnInit {
 
       this.flightService.getCityById(this.flightToEdit.destinationId).subscribe(res => {
         this.flightToEdit.destination = res.name;
-      })
-       });
+        })
+        this.flightService.getAllBookings().subscribe(bkk => {
+          console.log(bkk);
+          bkk.forEach(element => {
+            if (element.flightId.toString() === this.id.toString()) {
+              this.isEnable = true;
+            }
+          });
+        })
+      });
     });
+
+    
+
   }
 
   saveChanges(number:string, price:number) {
@@ -37,5 +49,7 @@ export class EditFlightComponent implements OnInit {
       this.router.navigate(['/manage'])
     })
   }
+
+  
 
 }
