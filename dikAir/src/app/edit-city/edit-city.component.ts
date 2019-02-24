@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FlightService } from "../flight.service";
 import { City } from '../city';
 import { Router, Route } from "@angular/router";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-edit-city',
@@ -10,7 +11,7 @@ import { Router, Route } from "@angular/router";
 })
 export class EditCityComponent implements OnInit {
 
-  constructor(private flightService:FlightService, private router:Router) { }
+  constructor(private flightService:FlightService, private router:Router, private toast:ToastrService) { }
 
   citiesList:City[] = [];
 
@@ -31,11 +32,26 @@ export class EditCityComponent implements OnInit {
   }
 
   saveChanges(id:number, newName:string) {
-    this.flightService.updateCity(id, newName).subscribe(res => {
-      this.flightService.getCityById(id).subscribe(res => {
-        this.citiesList.find(ct => ct.id === id).name = res.name;
-        console.log(this.citiesList);
-      })
+    this.flightService.getFlights().subscribe(flt => {
+      var isAbleToSave = true;
+      console.log(flt);
+      flt.forEach(element => {
+        if (element.destinationId === id || element.originId === id) {
+          isAbleToSave = false;
+        }
       });
+      console.log(isAbleToSave);
+      if (isAbleToSave) {
+        this.flightService.updateCity(id, newName).subscribe(res => {
+          this.flightService.getCityById(id).subscribe(res => {
+            this.citiesList.find(ct => ct.id === id).name = res.name;
+          })
+        });
+      } else {
+        this.toast.error("Can't edit city which alreaedy in use", "Error!", {
+          timeOut: 5000
+        });
+      }
+    })
     }
 }
