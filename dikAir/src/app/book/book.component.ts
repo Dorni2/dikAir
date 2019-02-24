@@ -65,17 +65,46 @@ export class BookComponent implements OnInit {
   }
 }
 
-  deleteFlight(flightId:number) {
-    this.flightService.deleteFlight(flightId).subscribe(res => {
-      if (res === 1) {
-        this.flightsToShow.forEach(element => {
-          if (element.id === flightId) {
-            this.flightsToShow.splice(this.flightsToShow.indexOf(element), 1)
-          }
-        });
+// deleteFlight(flightId:number) {
+//   this.flightService.deleteFlight(flightId).subscribe(res => {
+//     if (res === 1) {
+//       this.flightsToShow.forEach(element => {
+//         if (element.id === flightId) {
+//           this.flightsToShow.splice(this.flightsToShow.indexOf(element), 1)
+//         }
+//       });
+//     }
+//   })
+// }
+
+deleteFlight(flightId:number) {
+  this.flightService.getAllBookings().subscribe(bkk => {
+    var isAbleToDelete = true;
+    bkk.forEach(element => {
+      if (element.flightId.toString() === flightId.toString()) {
+        isAbleToDelete = false;
       }
-    })
-  }
+    });
+    if (isAbleToDelete) {
+      this.flightService.deleteFlight(flightId).subscribe(res => {
+        if (res === 1) {
+          this.flightsToShow.forEach(element => {
+            if (element.id === flightId) {
+              this.flightsToShow.splice(this.flightsToShow.indexOf(element), 1)
+            }
+          });
+        }
+      })
+    } else {
+      this.toast.error("Can't delete flight already booked", "Error!", {
+        timeOut: 5000
+      });
+    }
+  })
+
+
+}
+
 
   editFlight(flightId:number) {
     this.router.navigate(['/editFlight', flightId])
