@@ -21,8 +21,12 @@ export class ChartComponent implements OnInit {
 destinations:string[] = [];
 count:number[] = [];
 destWithNames:string[] = [];  
+showGraph:boolean = false;
 
   ngOnInit() {
+    setTimeout(() => {
+      this.showGraph = true;
+    }, 3000);
     this.flightService.getFlightStats().subscribe(allStats => {
       allStats.forEach(stat => {
         this.destinations.push(stat._id.toString());

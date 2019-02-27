@@ -21,6 +21,7 @@ isFlights:boolean = false;
 isCreateFlight:boolean = false;
 isEditCities:boolean = false;
 isCreateCity:boolean = false;
+isManageBookings:boolean = false;
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -57,6 +58,14 @@ isCreateCity:boolean = false;
     this.isEditCities = false;
     this.isCreateFlight = false;
     this.isFlights = false;
+  }
+
+  manageBookings() {
+    this.isCreateCity = false;
+    this.isEditCities = false;
+    this.isCreateFlight = false;
+    this.isFlights = false;
+    this.isManageBookings = true;
   }
 
 }

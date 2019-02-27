@@ -1,5 +1,9 @@
+<app-bookings-count></app-bookings-count>
 <div>
-    <div style="display: block; width: 80%; margin-left: 10%">
+    <div style="margin-left: 50%;" *ngIf="!showGraph" class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    <div *ngIf="showGraph" style="display: block; width: 80%; margin-left: 10%">
       <canvas baseChart
               [datasets]="ChartData"
               [labels]="ChartLabels"

@@ -32,6 +32,7 @@ import { MyBookingsComponent } from './my-bookings/my-bookings.component';
 import { BookingsCountComponent } from './bookings-count/bookings-count.component';
 import { WordCounterPipe } from './word-counter.pipe';
 import { SearchComponent } from './search/search.component';
+import { ManageBookingsComponent } from './manage-bookings/manage-bookings.component';
 
 const appRoutes:Routes = [
   {path: 'chat', component: ChatComponent},
@@ -61,7 +62,8 @@ const appRoutes:Routes = [
     MyBookingsComponent,
     BookingsCountComponent,
     WordCounterPipe,
-    SearchComponent
+    SearchComponent,
+    ManageBookingsComponent
   ],
   imports: [
     BrowserModule,

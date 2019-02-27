@@ -1,9 +1,11 @@
-<app-bookings-count></app-bookings-count>
 <button class="btn btn-success" (click)="manageFlights()">Edit Flights</button>
 <button class="btn btn-success" (click)="createFlight()">Create Flights</button>
 <button class="btn btn-success" (click)="editCities()">Edit Cities</button>
 <button class="btn btn-success" (click)="createCity()">Create City</button>
+<button class="btn btn-success" (click)="manageBookings()">Manage bookings</button>
+
 <app-book *ngIf="isFlights" [isAdmin]=true ></app-book>
 <app-create-flight *ngIf="isCreateFlight"></app-create-flight>
 <app-edit-city *ngIf="isEditCities"></app-edit-city>
 <app-create-city *ngIf="isCreateCity"></app-create-city>
+<app-manage-bookings *ngIf="isManageBookings"></app-manage-bookings>

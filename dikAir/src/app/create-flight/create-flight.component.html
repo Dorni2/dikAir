@@ -1,12 +1,12 @@
-<form class="form-group" >
-  Flight number: <input style="width:30%; display: inline;" class="form-control" #flightNumber  type="text" name="number">
-  Origin: <select  style="width:30%;" #originId class="custom-select">
+<form class="form-group" #heroForm>
+  Flight number: <input style="width:30%; display: inline;" class="form-control" #flightNumber  type="text" name="number" required>
+  Origin: <select  style="width:30%;" #originId class="custom-select" required>
     <option *ngFor="let item of citiesList" value={{item.id}}>{{ item.name }}</option>
   </select>
-  Destination: <select  style="width:30%; display: inline;" #destinationId class="custom-select">
+  Destination: <select  style="width:30%; display: inline;" #destinationId class="custom-select" required>
     <option *ngFor="let item of citiesList" value={{item.id}}>{{ item.name }}</option>
   </select> <br>
-  Price: <input style="width:30%;" class="form-control" #flightPrice type="text" name="number">
+  Price: <input style="width:30%;" class="form-control" #flightPrice type="text" name="number" required>
 
   <button class="btn btn-primary" (click)="createFlight(flightNumber.value, flightPrice.value, originId.value, destinationId.value)" >Create Flight</button>
 </form>

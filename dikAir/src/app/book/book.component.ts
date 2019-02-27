@@ -107,7 +107,15 @@ deleteFlight(flightId:number) {
 
 
   editFlight(flightId:number) {
-    this.router.navigate(['/editFlight', flightId])
+    this.flightService.getFlightById(flightId).subscribe(flt => {
+      if (flt != null){
+      this.router.navigate(['/editFlight', flightId])
+      } else {
+        this.toast.error("Can't edit flight because it doesnt exist anymore", "Error!", {
+          timeOut: 5000
+        });
+      }
+    })
   }
 
   bookFlight(flightId:number, price:number) {
