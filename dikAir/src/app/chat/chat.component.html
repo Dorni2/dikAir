@@ -9,7 +9,7 @@
     [(ngModel)]="message"
     (keyup)="$event.keyCode == 13 && sendMessage()"
   />
-  <button (click)="sendMessage()">Send</button>
+  <button class="btn btn-primary" (click)="sendMessage()">Send</button>
 </div>
 <div *ngIf="!isLogged">
   <h1>You are not allowed to reach this page!</h1>

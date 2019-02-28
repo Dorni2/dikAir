@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FlightService } from "../flight.service";
 import { Flight } from '../flight';
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-manage-bookings',
@@ -9,7 +10,7 @@ import { Flight } from '../flight';
 })
 export class ManageBookingsComponent implements OnInit {
 
-  constructor(private flightService:FlightService) { }
+  constructor(private flightService:FlightService, private toast:ToastrService) { }
 
   flightsToShow:Flight[] = [];
 
@@ -42,12 +43,18 @@ export class ManageBookingsComponent implements OnInit {
             console.log(element);
             //this.chatService.deleteOrder(element);
           })
+        } else {
+          this.toast.error("Can't remove city which is destination or origin for flight", "Error!", {
+            timeOut: 5000
+          });
         }
       });
     })
-    this.flightService.cancelBooking(bookingId).subscribe(deletedBooking => {
+    // this.flightService.cancelBooking(bookingId).subscribe(deletedBooking => {
 
-    })
+    // })
   }
+
+  
 
 }

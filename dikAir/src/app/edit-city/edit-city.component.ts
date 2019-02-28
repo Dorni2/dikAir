@@ -21,14 +21,32 @@ export class EditCityComponent implements OnInit {
     })
   }
 
-  deleteCity(cityId:number) {    
-    this.flightService.deleteCity(cityId).subscribe(res => {
-      this.citiesList.forEach(element => {
-        if(element.id === cityId) {
-          this.citiesList.splice(this.citiesList.indexOf(element), 1);
+  deleteCity(cityId:number) {
+    
+    this.flightService.getFlights().subscribe(flts => {
+      var isCityInUse = false;
+      flts.forEach(element => {
+        if (element.destinationId === cityId || element.originId === cityId) {
+          isCityInUse = true;
         }
       });
+
+      if (!isCityInUse) {
+        this.flightService.deleteCity(cityId).subscribe(res => {
+          this.citiesList.forEach(element => {
+            if(element.id === cityId) {
+              this.citiesList.splice(this.citiesList.indexOf(element), 1);
+            }
+          });
+        })
+      } else {
+        this.toast.error("Can't remove city which is destination or origin for flight", "Error!", {
+          timeOut: 5000
+        });
+      }
+
     })
+    
   }
 
   saveChanges(id:number, newName:string) {
@@ -46,6 +64,9 @@ export class EditCityComponent implements OnInit {
           this.flightService.getCityById(id).subscribe(res => {
             this.citiesList.find(ct => ct.id === id).name = res.name;
           })
+        });
+        this.toast.error("City was removed!", "Error!", {
+          timeOut: 5000
         });
       } else {
         this.toast.error("Can't edit city which alreaedy in use", "Error!", {

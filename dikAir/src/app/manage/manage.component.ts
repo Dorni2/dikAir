@@ -37,6 +37,7 @@ isManageBookings:boolean = false;
     this.isCreateFlight = false;
     this.isEditCities = false;
     this.isCreateCity = false;
+    this.isManageBookings = false;
   }
 
   createFlight() {
@@ -44,6 +45,7 @@ isManageBookings:boolean = false;
     this.isFlights = false;
     this.isEditCities = false;
     this.isCreateCity = false;
+    this.isManageBookings = false;
   }
 
   editCities() {
@@ -51,6 +53,7 @@ isManageBookings:boolean = false;
     this.isCreateFlight = false;
     this.isFlights = false;
     this.isCreateCity = false;
+    this.isManageBookings = false;
   }
 
   createCity() {
@@ -58,6 +61,7 @@ isManageBookings:boolean = false;
     this.isEditCities = false;
     this.isCreateFlight = false;
     this.isFlights = false;
+    this.isManageBookings = false;
   }
 
   manageBookings() {

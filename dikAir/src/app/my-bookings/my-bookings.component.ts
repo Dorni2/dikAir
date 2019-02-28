@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { FlightService } from "../flight.service";
 import { Flight } from '../flight';
 import { ChatService } from "../chat.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-my-bookings',
@@ -12,7 +13,7 @@ import { ChatService } from "../chat.service";
 })
 export class MyBookingsComponent implements OnInit {
 
-  constructor(private globals:Globals,  private router:Router, private flightService:FlightService, private chatService:ChatService) { 
+  constructor(private globals:Globals,  private router:Router, private flightService:FlightService, private chatService:ChatService, private toast:ToastrService) { 
     if(this.globals.loggedUser === null) {
       this.router.navigate(['/error']);
     }
@@ -40,20 +41,32 @@ export class MyBookingsComponent implements OnInit {
 
   cancelOrder(bookingId:number) {
     console.log(bookingId);
-    this.flightService.getAllBookings().subscribe(all => {
-      all.forEach(element => {
-        if (element.id === bookingId)
-        {
-          this.flightService.cancelBooking(bookingId).subscribe(res => {
-            this.flightsToShow.splice(this.flightsToShow.findIndex(flt => flt['bookingId'] === bookingId), 1);
-            console.log(element);
-            this.chatService.deleteOrder(element);
-          })
+    this.flightService.getAllBookings().subscribe(bkk => {
+      var bookingExist = false;
+      bkk.forEach(element => {
+        if (element.id === bookingId) {
+          bookingExist = true;
         }
       });
-    })
-    this.flightService.cancelBooking(bookingId).subscribe(deletedBooking => {
 
+      if (bookingExist) {
+        this.flightService.getAllBookings().subscribe(all => {
+          all.forEach(element => {
+            if (element.id === bookingId)
+            {
+              this.flightService.cancelBooking(bookingId).subscribe(res => {
+                this.flightsToShow.splice(this.flightsToShow.findIndex(flt => flt['bookingId'] === bookingId), 1);
+                console.log(element);
+                this.chatService.deleteOrder(element);
+              })
+            }
+          });
+        })
+      } else {
+        this.toast.error("Can't remove flight which doesn't exist", "Error!", {
+          timeOut: 5000
+        });
+      }
     })
   }
 }
