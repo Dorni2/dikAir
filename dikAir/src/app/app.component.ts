@@ -12,6 +12,7 @@ export class AppComponent {
   }
 
   title = 'DikAir'
+  name="Dor"
 
 
 }
